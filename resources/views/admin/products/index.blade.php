@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>Products</h1>
+    <div class="content_header d-flex justify-content-between">
+        <h1>Products</h1>
+        <a name="" id="" class="btn btn-dark h-75" href="{{ route('admin.products.create') }}" role="button">ADD
+            PRODUCT</a>
+    </div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -18,9 +22,14 @@
                     <td>{{ $product->name }}</td>
                     <td class="w-50">{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
-                    <td>view | edit | delete</td>
+                    <td>
+                        <a href="#">view</a> |
+                        <a href="#">edit</a> |
+                        <a href="#"> delete</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
 @endsection
