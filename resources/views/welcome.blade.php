@@ -8,7 +8,7 @@
                 companies use BoolPress than all other options combined. Join the millions of people that call BoolPress
                 home.</p>
         </div>
-        <div class="overflow-hidden" style="max-height: 30vh;">
+        <div class="overflow-hidden" style="max-height: 40vh;">
             <div class="container px-5">
                 <img src="https://i1.wp.com/s1.wp.com/wp-content/themes/h4/landing/marketing/pages/hp-jan-2020-v2/media/desktop/desktop-website-v2.jpg?ssl=1"
                     class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700" height="500"
