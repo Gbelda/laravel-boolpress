@@ -38,12 +38,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
             @auth
-                <div class="row">
+                <div class="col">
                     <div class="name text-white text-center">Hi {{ Auth::user()->name }}</div>
                     <div class="logout text-white text-center">
                         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                                        document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
