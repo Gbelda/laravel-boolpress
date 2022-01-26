@@ -31,7 +31,7 @@
                     <td>{{ $product->price }}</td>
                     <td>
                         <a href="{{ route('admin.products.show', $product->id) }}">view</a> |
-                        <a href="#">edit</a> |
+                        <a href="{{ route('admin.products.edit', $product->id) }}">edit</a> |
                         <a href="#"> delete</a>
                     </td>
                 </tr>

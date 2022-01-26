@@ -45,7 +45,7 @@ class ProductController extends Controller
         ]);
 
         Product::create($validated);
-        return redirect()->route('admin.products.index')->with('message', 'Comic Added Successfully!');
+        return redirect()->route('admin.products.index')->with('message', 'Product Added Successfully!');
 
         
     }
@@ -70,7 +70,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
@@ -82,7 +82,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->all();
+
+        $product->update($data);
+        return redirect()->route('admin.products.index')->with('message', 'Product Changed Successfully!');
     }
 
     /**
