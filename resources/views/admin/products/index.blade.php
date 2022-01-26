@@ -30,7 +30,7 @@
                     <td class="w-50">{{ $product->description }}</td>
                     <td>{{ $product->price }}</td>
                     <td>
-                        <a href="#">view</a> |
+                        <a href="{{ route('admin.products.show', $product->id) }}">view</a> |
                         <a href="#">edit</a> |
                         <a href="#"> delete</a>
                     </td>

@@ -45,7 +45,7 @@
                     <div class="logout text-white text-center">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                                                                        document.getElementById('logout-form').submit();">
+                                                                                                                                                                                        document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -63,14 +63,16 @@
                     <div class="position-sticky pt-5">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
+                                <a class="nav-link {{ Route::currentRouteName() == 'admin.home' ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('admin.home') }}">
                                     <i class="fas fa-tachometer-alt fa-lg fa-fw"></i>
                                     Dashboard
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.products.index') }}">
+                                <a class="nav-link {{ Str::of(Route::currentRouteName())->contains('products') ? 'active' : '' }}"
+                                    href="{{ route('admin.products.index') }}">
                                     Products
                                 </a>
                             </li>
