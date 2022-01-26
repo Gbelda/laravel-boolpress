@@ -24,7 +24,7 @@
 <body>
     <div id="app">
 
-        <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <header class="navbar navbar-light sticky-top bg-light flex-md-nowrap p-0 shadow">
             <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ route('admin.home') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 36" class="x-icon x-icon--logo w-75">
                     <path
@@ -37,15 +37,15 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+            <input class="form-control w-100 border mx-1" type="search" placeholder="Search" aria-label="Search">
 
             @auth
                 <div class="col">
-                    <div class="name text-white text-center">Hi {{ Auth::user()->name }}</div>
+                    <div class="name text-dark text-center">Hi {{ Auth::user()->name }}</div>
                     <div class="logout text-white text-center">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                            document.getElementById('logout-form').submit();">
+                                                                                                                                                        document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -63,7 +63,7 @@
                     <div class="position-sticky pt-5">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">
+                                <a class="nav-link active" aria-current="page" href="{{ route('admin.home') }}">
                                     <i class="fas fa-tachometer-alt fa-lg fa-fw"></i>
                                     Dashboard
                                 </a>

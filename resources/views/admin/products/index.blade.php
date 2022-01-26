@@ -5,6 +5,13 @@
         <a name="" id="" class="btn btn-dark h-75" href="{{ route('admin.products.create') }}" role="button">ADD
             PRODUCT</a>
     </div>
+
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <table class="table table-striped">
         <thead>
             <tr>

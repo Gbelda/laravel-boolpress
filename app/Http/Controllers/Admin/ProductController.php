@@ -36,7 +36,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'image' => 'nullable',
+            'price' => 'required|numeric',
+        ]);
+
+        Product::create($validated);
+        return redirect()->route('admin.products.index')->with('message', 'Comic Added Successfully!');
+
+        
     }
 
     /**
