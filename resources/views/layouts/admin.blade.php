@@ -43,8 +43,9 @@
                 <div class="col">
                     <div class="name text-white text-center">Hi {{ Auth::user()->name }}</div>
                     <div class="logout text-white text-center">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                                                                            document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -69,7 +70,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('admin.products.index') }}">
                                     Products
                                 </a>
                             </li>
