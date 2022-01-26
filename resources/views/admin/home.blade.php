@@ -13,7 +13,7 @@
                 </div>
             @endif
 
-            {{ __('You are logged in!') }} from your dashboard you can add, edit and delete stuff.
+            {{ __('You are logged in!') }}
         </div>
     </div>
 
