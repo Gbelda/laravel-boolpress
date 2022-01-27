@@ -16,6 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->text('content');
             $table->string('image')->default('https://i.picsum.photos/id/901/536/354.jpg?hmac=REtSp05OIrVfhKww8Zkj3H5nGnKZq_rCxqNy6z5CFtA');
             $table->date('post_date');
