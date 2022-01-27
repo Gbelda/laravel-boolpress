@@ -45,7 +45,7 @@
                     <div class="logout text-white text-center">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                                                                                                                        document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                            document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -78,7 +78,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.articles.index') }}">
+                                <a class="nav-link {{ Str::of(Route::currentRouteName())->contains('articles') ? 'active' : '' }}"
+                                    href="{{ route('admin.articles.index') }}">
                                     Articles
                                 </a>
                             </li>
