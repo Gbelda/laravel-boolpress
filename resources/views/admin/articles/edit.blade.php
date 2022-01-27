@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <h1>NEW ARTICLE</h1>
+    <h1>EDIT ARTICLE</h1>
     <form method="POST" action="{{ route('admin.articles.update', $article->slug) }}">
         @csrf
         @method('PUT')
@@ -23,6 +23,20 @@
                 </small>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">CATEGORY</label>
+            <select class="form-control" name="category" id="category">
+                <option selected disabled>Select a category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ $category->id == old('category', $article->category_id) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="mb-3 form-group">
             <label for="content" class="form-label @error('content') is-invalid @enderror">CONTENT</label>
             <textarea name="content" id="content" rows="10" class="w-100">{{ $article->content }}</textarea>

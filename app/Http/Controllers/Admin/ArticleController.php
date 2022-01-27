@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class ArticleController extends Controller
 {
@@ -28,7 +30,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.articles.create');
+        $categories = Category::all();
+        return view('admin.articles.create' ,compact('categories'));
     }
 
     /**
@@ -39,10 +42,13 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validated = $request->validate([
             'title' => ['required', 'unique:articles',],
             'content' => 'required',
             'image' => 'nullable',
+            'category' => 'nullable|exists:categories,id'
         ]);
 
         $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
@@ -71,7 +77,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('admin.articles.edit', compact('article'));
+        $categories = Category::all();
+        return view('admin.articles.edit', compact('article', 'categories'));
     }
 
     /**
@@ -83,7 +90,15 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $data = Arr::add($request->all(), 'slug', Str::slug($request->title));
+
+        $validated = $request->validate([
+            'title' => ['required', Rule::unique('articles')->ignore($article->id)],
+            'content' => 'required',
+            'image' => 'nullable',
+            'category' => 'nullable|exists:categories,id'
+        ]);
+
+        $data = Arr::add($validated, 'slug', Str::slug($request->title));
 
         $article->update($data);
         return redirect()->route('admin.articles.index')->with('message', 'Article Changed Successfully!');

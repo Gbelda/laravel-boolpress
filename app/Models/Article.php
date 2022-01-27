@@ -10,7 +10,7 @@ class Article extends Model
         return 'slug';
     }
 
-    protected $fillable = ['title', 'slug', 'content', 'image', 'post_date'];
+    protected $fillable = ['title', 'slug', 'content', 'image', 'post_date', 'category_id'];
 
     public function category(){
 
