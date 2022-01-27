@@ -23,7 +23,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">TITLE</th>
-                <th scope="col">SLUG</th>
+                <th scope="col">CATEGORY</th>
                 <th scope="col">POST DATE</th>
                 <th scope="col">ACTIONS</th>
             </tr>
@@ -33,7 +33,7 @@
                 <tr>
                     <th scope="row">{{ $article->id }}</th>
                     <td>{{ $article->title }}</td>
-                    <td>{{ $article->slug }}</td>
+                    <td>{{ $article->category ? $article->category->name : 'Uncategorized' }}</td>
                     <td>{{ $article->post_date }}</td>
                     <td class="col">
                         <a href="{{ route('admin.articles.show', $article->slug) }}" class="pb-1">view</a> |
