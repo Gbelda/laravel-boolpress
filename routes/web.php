@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +18,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('products', ProductController::class)->only(['index', 'show']);
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 Auth::routes();
 
@@ -27,5 +27,6 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::resource('products', ProductController::class);
+    Route::resource('articles', ArticleController::class);
     
 });
