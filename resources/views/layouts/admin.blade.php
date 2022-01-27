@@ -45,7 +45,7 @@
                     <div class="logout text-white text-center">
                         <a class="nav-link" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                                                                                                                                                                        document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                    document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
@@ -79,7 +79,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
-                                    Features
+                                    Articles
                                 </a>
                             </li>
 
