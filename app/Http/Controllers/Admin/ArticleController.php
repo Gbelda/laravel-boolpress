@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -15,7 +17,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::paginate(10);
+        return view('admin.articles.index', compact('articles'));
     }
 
     /**
@@ -25,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.articles.create');
     }
 
     /**
@@ -36,7 +39,17 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'unique:articles',],
+            'content' => 'required',
+            'image' => 'nullable',
+        ]);
+
+        $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
+        $article = Arr::add($addSlug, 'post_date', date("Y-m-d"));
+
+        Article::create($article);
+        return redirect()->route('admin.articles.index')->with('message', 'Product Added Successfully!');
     }
 
     /**
@@ -47,7 +60,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', compact('article'));
     }
 
     /**
@@ -58,7 +71,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('admin.articles.edit', compact('article'));
     }
 
     /**
@@ -70,7 +83,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $data = Arr::add($request->all(), 'slug', Str::slug($request->title));
+
+        $article->update($data);
+        return redirect()->route('admin.articles.index')->with('message', 'Article Changed Successfully!');
     }
 
     /**
@@ -81,6 +97,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('admin.articles.index')->with('alert', 'Article Deleted Permanently!');
     }
 }
