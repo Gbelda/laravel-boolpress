@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -30,8 +31,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.articles.create' ,compact('categories'));
+        return view('admin.articles.create' ,compact('categories', 'tags'));
     }
 
     /**
@@ -48,13 +50,16 @@ class ArticleController extends Controller
             'title' => ['required', 'unique:articles',],
             'content' => 'required',
             'image' => 'nullable',
-            'category' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tag_id' => 'nullable|exists:tags,id',
         ]);
 
         $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
         $article = Arr::add($addSlug, 'post_date', date("Y-m-d"));
 
-        Article::create($article);
+        $new_article = Article::create($article);
+
+        $new_article->tags()->attach($request->tags);
         return redirect()->route('admin.articles.index')->with('message', 'Product Added Successfully!');
     }
 
@@ -66,7 +71,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('articles.show', compact('article'));
+        return view('guest.articles.show', compact('article'));
     }
 
     /**
@@ -77,8 +82,10 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.articles.edit', compact('article', 'categories'));
+        return view('admin.articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -95,12 +102,18 @@ class ArticleController extends Controller
             'title' => ['required', Rule::unique('articles')->ignore($article->id)],
             'content' => 'required',
             'image' => 'nullable',
-            'category' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tag_id' => 'nullable|exists:tags,id',
         ]);
 
-        $data = Arr::add($validated, 'slug', Str::slug($request->title));
 
+        
+        $data = Arr::add($validated, 'slug', Str::slug($request->title));
+        // ddd($data);
+        
         $article->update($data);
+
+        $article->tags()->sync($request->tags);
         return redirect()->route('admin.articles.index')->with('message', 'Article Changed Successfully!');
     }
 

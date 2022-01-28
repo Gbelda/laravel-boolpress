@@ -26,11 +26,22 @@
         </div>
 
         <div class="mb-3">
-            <label for="category" class="form-label">CATEGORY</label>
-            <select class="form-control" name="category" id="category">
+            <label for="category_id" class="form-label">CATEGORY</label>
+            <select class="form-control" name="category_id" id="category_id">
                 <option selected disabled>Select a category</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3 form-group">
+            <label for="tags" class="form-label">TAGS</label>
+            <select multiple class="form-select" name="tags[]" id="tags">
+                @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">
+                        {{ $tag->name }}
+                    </option>
                 @endforeach
             </select>
         </div>

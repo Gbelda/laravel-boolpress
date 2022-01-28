@@ -10,7 +10,7 @@
                     tags:
                     @if (count($article->tags) > 0)
                         @foreach ($article->tags as $tag)
-                            {{ $tag->name }}
+                            #{{ $tag->name }}
                         @endforeach
                     @else
                         <span>No tags</span>
