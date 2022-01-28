@@ -17,7 +17,7 @@ class ArticleController extends Controller
     {
         $categories = Category::all();
         $articles = Article::paginate(6);
-        return view('articles.index', compact('articles', 'categories'));
+        return view('guest.articles.index', compact('articles', 'categories'));
     }
 
     /**
@@ -28,6 +28,6 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return view('articles.show', compact('article'));
+        return view('guest.articles.show', compact('article'));
     }
 }

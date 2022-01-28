@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function articles(Category $category){
+
+        $articles = $category->articles()->orderByDesc('id')->paginate(6);
+        return view('guest.categories.articles', compact('articles', 'category'));
+
+
+    }
+
     /**
      * Display a listing of the resource.
      *
