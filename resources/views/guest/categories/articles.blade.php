@@ -46,15 +46,15 @@
 
             @empty
                 <div class="col">
-                    <h1>
+                    <h1 class="">
                         NO ARTICLES IN THIS CATEGORY.
                     </h1>
                 </div>
 
             @endforelse
 
-
             {{ $articles->links() }}
         </div>
     </div>
+
 @endsection
