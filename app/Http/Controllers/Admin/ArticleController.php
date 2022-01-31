@@ -69,7 +69,7 @@ class ArticleController extends Controller
 
         $new_article = Article::create($article);
 
-        ddd($new_article);
+        // ddd($new_article);
 
         if ($request->has('tags')) {
             $request->validate([
