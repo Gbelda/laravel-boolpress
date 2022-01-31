@@ -49,25 +49,27 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         // ddd($request->image);
-        $image_path = Storage::put('placeholder', $request['image']);
-
         
-
+        
+        
         $validated = $request->validate([
             'title' => ['required', 'unique:articles'],
             'content' => 'required',
-            'image' => 'nullable',
+            'image' => 'nullable|image|max:200',
             'category_id' => 'nullable|exists:categories,id',
         ]);
         $validated['user_id'] = Auth::id();
-
         
+        $image_path = Storage::put('post-img', $request->file('image'));
+        $validated['image'] = $image_path;
         $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
         $article = Arr::add($addSlug, 'post_date', date("Y-m-d"));
 
         // ddd($article);
 
         $new_article = Article::create($article);
+
+        ddd($new_article);
 
         if ($request->has('tags')) {
             $request->validate([
