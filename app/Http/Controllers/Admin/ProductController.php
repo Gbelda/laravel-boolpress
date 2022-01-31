@@ -44,6 +44,8 @@ class ProductController extends Controller
             'price' => 'required|numeric',
         ]);
 
+        
+
         Product::create($validated);
         return redirect()->route('admin.products.index')->with('message', 'Product Added Successfully!');
 

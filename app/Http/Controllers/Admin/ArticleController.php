@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
@@ -35,7 +35,7 @@ class ArticleController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.articles.create' ,compact('categories', 'tags'));
+        return view('admin.articles.create', compact('categories', 'tags'));
     }
 
     /**
@@ -47,21 +47,29 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
 
-
         $validated = $request->validate([
-            'title' => ['required', 'unique:articles',],
+            'title' => ['required', 'unique:articles'],
             'content' => 'required',
             'image' => 'nullable',
             'category_id' => 'nullable|exists:categories,id',
-            'tag_id' => 'nullable|exists:tags,id',
         ]);
+        $validated['user_id'] = Auth::id();
 
         $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
         $article = Arr::add($addSlug, 'post_date', date("Y-m-d"));
 
+        // ddd($article);
+
         $new_article = Article::create($article);
 
+        if ($request->has('tags')) {
+            $request->validate([
+                'tags' => 'nullable|exists:tags,id',
+
+            ]);
+        }
         $new_article->tags()->attach($request->tags);
+
         return redirect()->route('admin.articles.index')->with('message', 'Product Added Successfully!');
     }
 
@@ -87,7 +95,13 @@ class ArticleController extends Controller
 
         $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.articles.edit', compact('article', 'categories', 'tags'));
+
+        if (Auth::id() === $article->user_id) {
+            return view('admin.articles.edit', compact('article', 'categories', 'tags'));
+        } else {
+            abort(403);
+        }
+
     }
 
     /**
@@ -100,23 +114,32 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
 
-        $validated = $request->validate([
-            'title' => ['required', Rule::unique('articles')->ignore($article->id)],
-            'content' => 'required',
-            'image' => 'nullable',
-            'category_id' => 'nullable|exists:categories,id',
-            'tag_id' => 'nullable|exists:tags,id',
-        ]);
+        if (Auth::id() === $article->user_id) {
+            $validated = $request->validate([
+                'title' => ['required', Rule::unique('articles')->ignore($article->id)],
+                'content' => 'required',
+                'image' => 'nullable',
+                'category_id' => 'nullable|exists:categories,id',
+            ]);
 
+            $data = Arr::add($validated, 'slug', Str::slug($request->title));
+            // ddd($data);
 
-        
-        $data = Arr::add($validated, 'slug', Str::slug($request->title));
-        // ddd($data);
-        
-        $article->update($data);
+            $article->update($data);
 
-        $article->tags()->sync($request->tags);
-        return redirect()->route('admin.articles.index')->with('message', 'Article Changed Successfully!');
+            if ($request->has('tags')) {
+                $request->validate([
+                    'tags' => 'nullable|exists:tags,id',
+
+                ]);
+            }
+            $article->tags()->sync($request->tags);
+
+            return redirect()->route('admin.articles.index')->with('message', 'Article Changed Successfully!');
+
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -127,8 +150,13 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        $article->delete();
+        if (Auth::id() === $article->user_id) {
+            $article->delete();
+            return redirect()->route('admin.articles.index')->with('alert', 'Article Deleted Permanently!');
 
-        return redirect()->route('admin.articles.index')->with('alert', 'Article Deleted Permanently!');
+        } else {
+            abort(403);
+        }
+
     }
 }

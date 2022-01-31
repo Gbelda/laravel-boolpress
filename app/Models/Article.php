@@ -9,20 +9,22 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
-    public function getRouteKeyName(){
+    public function getRouteKeyName()
+    {
         return 'slug';
     }
 
-    protected $fillable = ['title', 'slug', 'content', 'image', 'post_date', 'category_id', 'tags'];
+    protected $fillable = ['title', 'slug', 'content', 'image', 'post_date', 'category_id', 'user_id'];
 
-    public function category():BelongsTo
-    { 
+    public function category(): BelongsTo
+    {
 
         return $this->belongsTo(Category::class);
 
     }
 
-    public function tags() :BelongsToMany {
+    public function tags(): BelongsToMany
+    {
         return $this->belongsToMany(Tag::class);
     }
 
@@ -31,7 +33,7 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
