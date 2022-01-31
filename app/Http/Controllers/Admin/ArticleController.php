@@ -11,9 +11,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -46,6 +48,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        // ddd($request->image);
+        $image_path = Storage::put('placeholder', $request['image']);
+
+        
 
         $validated = $request->validate([
             'title' => ['required', 'unique:articles'],
@@ -55,6 +61,7 @@ class ArticleController extends Controller
         ]);
         $validated['user_id'] = Auth::id();
 
+        
         $addSlug = Arr::add($validated, 'slug', Str::slug($request->title));
         $article = Arr::add($addSlug, 'post_date', date("Y-m-d"));
 

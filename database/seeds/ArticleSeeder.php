@@ -18,7 +18,7 @@ class ArticleSeeder extends Seeder
             $article->title = $faker->sentence(6);
             $article->slug = Str::slug($article->title);
             $article->content = $faker->paragraphs(rand(4, 6), true);
-            $article->image = "https://picsum.photos/id/{$faker->numberbetween(1001, 1068)}/536/354";
+            $article->image = 'placeholder/' . '2FURsbe7xklihm3NmO6YKvMXke1Gf1jOLyxHGU1v.jpg';
             $article->post_date = $faker->date();
             $article->save();
         }

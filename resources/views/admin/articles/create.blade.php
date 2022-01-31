@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <h1>NEW ARTICLE</h1>
-    <form method="POST" action="{{ route('admin.articles.store') }}">
+    <form method="POST" action="{{ route('admin.articles.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3 form-group">
@@ -15,9 +15,8 @@
             @enderror
         </div>
         <div class="mb-3 form-group">
-            <label for="image" class="form-label @error('image') is-invalid @enderror">IMAGE URL</label>
-            <input type="text" class="form-control" id="image" placeholder="https://" value="{{ old('image') }}"
-                name="image">
+            <label for="image" class="form-label @error('image') is-invalid @enderror">IMAGE</label>
+            <input type="file" class="form-control" id="image" placeholder="https://" name="image">
             @error('image')
                 <small>
                     <div class="alert alert-danger">{{ $message }}</div>
