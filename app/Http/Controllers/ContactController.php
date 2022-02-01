@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Mail\ContactFormMail;
+use App\Mail\ContactFormMailable;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -24,11 +27,11 @@ class ContactController extends Controller
         ]);
 
 
-        ddd($validated);
+        // ddd($validated);
         // $contact = Contact::create($validated);
-        // Mail::to('admin.example.com')->send(new )
-
         // return (new ContactFormMail($validated))->render();
+        Mail::to('giovanni@gmail.com')->send(new ContactFormMailable($validated));
+        return redirect()->back()->with('message', 'Message sent successfully');
 
 
 
