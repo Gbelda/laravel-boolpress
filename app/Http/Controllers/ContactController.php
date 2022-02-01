@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+
         public function contacts(){
-        return view('guest.contacts.index');
+
+            
+         return view('guest.contacts.index');
     }
 
         public function store(Request $request){
@@ -15,16 +18,19 @@ class ContactController extends Controller
         $validated = $request->validate([
             'name' => 'required|min:4|max:50',
             'email' => 'required|email',
-            'messagae' => 'required|min:50|max|500'
+            'subject' => 'required',
+            'message' => 'required|min:50|max:500'
 
         ]);
 
-        $contact = Contact::create($validated);
+
+        ddd($validated);
+        // $contact = Contact::create($validated);
         // Mail::to('admin.example.com')->send(new )
 
         // return (new ContactFormMail($validated))->render();
 
-        
+
 
     }
 }
