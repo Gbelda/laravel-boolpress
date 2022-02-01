@@ -8,14 +8,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactFormMailable extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * 
-     * @var \App\Models\Contact  
-     */
     protected $contact;
 
     /**
@@ -35,13 +31,10 @@ class ContactFormMailable extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@admin.com')
-                    ->subject($this->contact['subject'])
-                    ->markdown('emails.contactEmail')
-                    ->with([
-                        'name' => $this->contact->name,
-                        'message' => $this->contact->message,
-                        'email' => $this->contact->email,
+        return $this->from('noreply@example.com')->markdown('emails.contacts')->with([
+            'name' => $this->contact->name,
+            'message' => $this->contact->message,
+            'email' => $this->contact->email,
 
 
         ]);

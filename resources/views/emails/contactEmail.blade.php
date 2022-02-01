@@ -1,12 +1,14 @@
 @component('mail::message')
-    Hello Admin,
 
-    {{ $data['message'] }}
+    {{ $contact['message'] }}
+
+    {{-- From: {{ $name }}
+    Email:{{ $email }} --}}
 
     @component('mail::button', ['url' => route('home')])
         Click for Website
     @endcomponent
 
-    Thanks,<br>
+    Thanks,
     {{ config('app.name') }}
 @endcomponent
