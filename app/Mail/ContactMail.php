@@ -37,6 +37,6 @@ class ContactMail extends Mailable
             'email' => $this->contact->email,
 
 
-        ]);
+        ])->subject($this->contact->subject);
     }
 }

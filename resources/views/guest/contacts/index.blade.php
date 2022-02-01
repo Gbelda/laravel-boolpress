@@ -27,7 +27,7 @@
                 <div class="form-group pb-3">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control" placeholder="Name Lastname"
-                        aria-describedby="nameHelp">
+                        aria-describedby="nameHelp" value="{{ old('name') }}">
                     @error('name')
                         <small>
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -38,7 +38,7 @@
                 <div class="form-group pb-3">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control" placeholder="Email address"
-                        aria-describedby="emailHelp">
+                        aria-describedby="emailHelp" value="{{ old('email') }}">
                     @error('email')
                         <small>
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -49,7 +49,7 @@
                 <div class="form-group pb-3">
                     <label for="subject">Subject</label>
                     <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject"
-                        aria-describedby="subjectHelp">
+                        aria-describedby="subjectHelp" value="{{ old('subject') }}">
                     @error('subject')
                         <small>
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -59,7 +59,7 @@
 
                 <div class="form-group pb-3">
                     <label for="message">Message Body</label>
-                    <textarea class="form-control" name="message" id="message" rows="5"></textarea>
+                    <textarea class="form-control" name="message" id="message" rows="5">{{ old('message') }}</textarea>
                     @error('message')
                         <small>
                             <div class="alert alert-danger">{{ $message }}</div>

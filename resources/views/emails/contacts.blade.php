@@ -8,10 +8,9 @@ From: {{ $name }}
 
 Email: {{ $email }}
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => route('home')])
+Go to Website
 @endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+
 @endcomponent
