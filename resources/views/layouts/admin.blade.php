@@ -72,7 +72,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link {{ Str::of(Route::currentRouteName())->contains('products') ? 'active' : '' }}"
-                                    href="{{ route('admin.products.index') }}">
+                                    href="#">
                                     Products
                                 </a>
                             </li>
@@ -91,8 +91,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Plans & Pricing
+                                <a class="nav-link" href="{{ route('admin.contacts.index') }}">
+                                    Contacts
                                 </a>
                             </li>
 

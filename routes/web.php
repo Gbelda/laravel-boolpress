@@ -35,5 +35,6 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
 
     Route::resource('products', ProductController::class);
     Route::resource('articles', ArticleController::class);
+    Route::resource('contacts', ContactController::class);
     
 });
