@@ -33,6 +33,10 @@ Route::get('articles/{article}', function(Article $article){
     return new ArticleResource(Article::find($article));
 });
 
+Route::get('articlevue',function(){
+    return view('guest.articles.indexVue');
+});
+
 
 
 
