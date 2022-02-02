@@ -53738,7 +53738,20 @@ Vue.component('articles', __webpack_require__(/*! ./components/ArticleComponent.
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    articles: null
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Axios.get('api/articles').then(function (response) {
+      console.log(response);
+      _this.articles = response.data.data;
+    })["catch"](function (error) {
+      return error;
+    });
+  }
 });
 
 /***/ }),

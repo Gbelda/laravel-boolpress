@@ -33,4 +33,15 @@ Vue.component('articles', require('./components/ArticleComponent.vue').default);
 
 const app = new Vue({
     el: '#app',
+    data: {
+        articles : null,
+    },
+    mounted() {
+        Axios.get('api/articles')
+            .then((response) => {
+                console.log(response);
+                this.articles = response.data.data;
+            })
+            .catch((error) => error);
+    },
 });

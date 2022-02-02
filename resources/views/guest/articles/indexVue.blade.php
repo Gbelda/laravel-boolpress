@@ -4,6 +4,13 @@
 
     <h1>Articles</h1>
 
+    <div class="card text-left" v-for="article in articles">
+        <img class="card-img-top" src="" alt="">
+        <div class="card-body">
+            <h4 class="card-title">@{{ article.title }}</h4>
+            <p class="card-text">@{{ article.content }}</p>
+        </div>
+    </div>
 
-<articles></articles>
+    {{-- <articles></articles> --}}
 @endsection
