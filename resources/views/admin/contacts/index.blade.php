@@ -36,12 +36,12 @@
                     <td class="col">
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#view">
+                        <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#contact_{{ $contact->id }}">
                             view
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="view" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="contact_{{ $contact->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="view_{{ $contact->id }}" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -67,8 +67,6 @@
                         </div> |
 
 
-
-                        <a href="#" class="pb-1">edit</a> |
                         <!-- Button trigger modal -->
                         <button class="btn btn-link p-0" data-bs-toggle="modal"
                             data-bs-target="#delete_{{ $contact->id }}">

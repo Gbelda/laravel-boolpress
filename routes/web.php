@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ArticleResource;
+use App\Models\Article;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,10 +28,18 @@ Route::post('contact-us', 'ContactController@store')->name('contact.send');
 
 Route::get('categories/{category:slug}/articles', 'CategoryController@articles')->name('categories.articles');
 
+
+Route::get('articles/{article}', function(Article $article){
+    return new ArticleResource(Article::find($article));
+});
+
+
+
+
+######################################################################################################################
+#                                                ADMIN                                                              #
+####################################################################################################################
 Auth::routes();
- 
-
-
 
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
