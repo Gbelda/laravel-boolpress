@@ -12,7 +12,5 @@
         </div>
     </div>
 
-    {{ article }}
-
     {{-- <articles></articles> --}}
 @endsection

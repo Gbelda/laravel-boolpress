@@ -53745,7 +53745,7 @@ var app = new Vue({
   mounted: function mounted() {
     var _this = this;
 
-    Axios.get('api/articles').then(function (response) {
+    Axios.get('api/posts').then(function (response) {
       console.log(response);
       _this.articles = response.data.data;
     })["catch"](function (error) {

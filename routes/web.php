@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\ArticleResource;
+use App\Http\Resources\PostResource;
 use App\Models\Article;
 
 /*
@@ -29,8 +29,8 @@ Route::post('contact-us', 'ContactController@store')->name('contact.send');
 Route::get('categories/{category:slug}/articles', 'CategoryController@articles')->name('categories.articles');
 
 
-Route::get('articles/{article}', function(Article $article){
-    return new ArticleResource(Article::find($article));
+Route::get('posts/{post}', function(Article $article){
+    return new PostResource(Article::find($article));
 });
 
 Route::get('articlevue',function(){
