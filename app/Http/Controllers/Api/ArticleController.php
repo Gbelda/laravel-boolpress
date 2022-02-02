@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with('tags')->paginate(6);
-        return $articles;
+        // Senza risorsa
+        // $articles = Article::with('tags')->paginate(6);
+        // return $articles;
+
+        return ArticleResource::collection(Article::with(['category','tags'])->paginate(6));
     }
 
     /**
