@@ -21,9 +21,9 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('articles', require('./components/ArticleComponent.vue').default);
+Vue.component('posts', require('./components/ArticleComponent.vue').default);
 
 
 /* Setup Vue Router */
@@ -42,17 +42,7 @@ Vue.use(VueRouter)
  */
 
 const app = new Vue({
-    router,
+
     el: '#app',
-    data: {
-        articles : null,
-    },
-    mounted() {
-        Axios.get('api/posts')
-            .then((response) => {
-                console.log(response);
-                this.articles = response.data.data;
-            })
-            .catch((error) => error);
-    },
+
 });
