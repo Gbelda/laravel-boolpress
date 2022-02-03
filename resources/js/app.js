@@ -25,6 +25,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 Vue.component('articles', require('./components/ArticleComponent.vue').default);
 
+
+/* Setup Vue Router */
+
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,6 +42,7 @@ Vue.component('articles', require('./components/ArticleComponent.vue').default);
  */
 
 const app = new Vue({
+    router,
     el: '#app',
     data: {
         articles : null,
