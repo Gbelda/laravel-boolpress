@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
-
+<div class="container">
     <div class="card my-2">
         <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -16,6 +16,7 @@
             {{ __('You are logged in!') }}
         </div>
     </div>
+</div>
 
 
 @endsection

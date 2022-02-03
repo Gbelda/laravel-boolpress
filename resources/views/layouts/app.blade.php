@@ -23,6 +23,7 @@
 
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -36,22 +37,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+
                     <ul class="navbar-nav mr-auto">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('home') }}">Homepage</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('products.index') }}">Products</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('articles.index') }}">Articles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="">Resources</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact') }}">Contact Us</a>
+                                <a class="nav-link" href="{{ url('/') }}">Homepage</a>
                             </li>
                         </ul>
                     </ul>
@@ -76,9 +66,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                   document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
