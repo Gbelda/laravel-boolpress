@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.spa')
 
-@section('content')
-    <div class="px-4 pt-5 my-5 text-center border-bottom">
+@section('app')
+    {{-- <div class="px-4 pt-5 my-5 text-center border-bottom">
         <h1 class="display-4 fw-bold">Boolpress</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">43% of the web is built on BoolPress. More bloggers, small businesses, and Fortune 500
@@ -15,4 +15,7 @@
                     loading="lazy">
             </div>
         </div>
-</div>@endsection
+    </div> --}}
+
+    <App></App>
+@endsection

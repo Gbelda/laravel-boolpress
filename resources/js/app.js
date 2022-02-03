@@ -4,7 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-const { default: Axios } = require('axios');
 
 require('./bootstrap');
 
@@ -23,15 +22,47 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('posts', require('./components/ArticleComponent.vue').default);
+Vue.component('App', require('./App.vue').default);
+
+const Home = Vue.component('Home', require('./pages/HomeComponent.vue').default);
+
+const Products = Vue.component('products', require('./pages/ProductComponent.vue').default);
+
+
+const Posts = Vue.component('posts', require('./pages/ArticleComponent.vue').default);
+
+
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: Home,
+    },
+
+    {
+        path: '/products',
+        name: 'products',
+        component: Products,
+    },
+
+    {
+        path: '/posts',
+        name: 'posts',
+        component: Posts,
+    }
+];
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
 
 
 /* Setup Vue Router */
 
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
-
+Vue.use(VueRouter);
 
 
 
@@ -42,7 +73,8 @@ Vue.use(VueRouter)
  */
 
 const app = new Vue({
-
     el: '#app',
+    router,
 
 });
+

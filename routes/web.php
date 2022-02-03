@@ -16,17 +16,9 @@ use App\Models\Article;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
-Route::resource('products', ProductController::class)->only(['index', 'show']);
-Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
-Route::get('contact-us', 'ContactController@contacts')->name('contact');
-Route::post('contact-us', 'ContactController@store')->name('contact.send');
 
-Route::get('categories/{category:slug}/articles', 'CategoryController@articles')->name('categories.articles');
 
 
 Route::get('posts/{post}', function(Article $article){
@@ -48,8 +40,12 @@ Auth::routes();
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::resource('products', ProductController::class);
-    Route::resource('articles', ArticleController::class);
-    Route::resource('contacts', ContactController::class);
+    // Route::resource('products', ProductController::class);
+    // Route::resource('articles', ArticleController::class);
+    // Route::resource('contacts', ContactController::class);
     
 });
+
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any', '.*')->name('home');
