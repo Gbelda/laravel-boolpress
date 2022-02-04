@@ -5138,28 +5138,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      articles: null
+      articles: {},
+      meta: {},
+      links: {}
     };
   },
   methods: {
-    GetPosts: function GetPosts() {
+    GetPosts: function GetPosts(url) {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/posts").then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         // console.log(response);
         _this.articles = response.data.data;
+        _this.meta = response.data.meta;
+        _this.links = response.data.links;
       })["catch"](function (error) {
         return error;
       });
       console.log("Component mounted.");
+    },
+    NextPage: function NextPage() {
+      if (this.meta.current_page !== this.meta.last_page) {
+        this.GetPosts(this.links.next);
+      }
+    },
+    PrevPage: function PrevPage() {
+      if (this.meta.current_page !== 1) {
+        this.GetPosts(this.links.prev);
+      }
+    },
+    ToPage: function ToPage(page) {
+      this.GetPosts('/api/posts?page=' + page);
     }
   },
   mounted: function mounted() {
-    this.GetPosts();
+    this.GetPosts("/api/posts");
   }
 });
 
@@ -41540,24 +41566,20 @@ var render = function () {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "row" },
+      { staticClass: "row justify-content-center" },
       _vm._l(_vm.articles, function (article) {
         return _c(
           "div",
-          { key: article.id, staticClass: "card text-left mb-2" },
+          { key: article.id, staticClass: "card text-left m-2 col-3" },
           [
             _c("img", {
-              staticClass: "card-img-top w-25",
+              staticClass: "card-img-top w-50",
               attrs: { src: "storage/" + article.image, alt: "" },
             }),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("h4", { staticClass: "card-title" }, [
                 _vm._v(_vm._s(article.title)),
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(_vm._s(article.content)),
               ]),
             ]),
             _vm._v(" "),
@@ -41574,6 +41596,57 @@ var render = function () {
         )
       }),
       0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "links text-center mt-5" },
+      [
+        _c(
+          "span",
+          {
+            staticClass: "btn text-secondary",
+            on: {
+              click: function ($event) {
+                return _vm.PrevPage()
+              },
+            },
+          },
+          [_vm._v("Prev")]
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.meta.last_page, function (page) {
+          return _c(
+            "span",
+            {
+              key: page,
+              staticClass: "btn",
+              class:
+                _vm.meta.current_page === page ? "btn-primary" : "btn-light",
+              on: {
+                click: function ($event) {
+                  return _vm.ToPage(page)
+                },
+              },
+            },
+            [_vm._v(_vm._s(page))]
+          )
+        }),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "btn text-secondary",
+            on: {
+              click: function ($event) {
+                return _vm.NextPage()
+              },
+            },
+          },
+          [_vm._v("Next")]
+        ),
+      ],
+      2
     ),
   ])
 }
