@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Articles</h1>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center content">
 
       <div class="card text-left m-2 col-3" v-for="article in articles" :key="article.id">
 
@@ -19,9 +19,9 @@
     </div>
 
     <div class="links text-center mt-5">
-      <span class="btn text-secondary" @click="PrevPage()" >Prev</span>
+      <span class="btn text-secondary"  :class="meta.current_page === 1 ? 'disabled' : ''" @click="PrevPage()" >Prev</span>
       <span class="btn" :class="meta.current_page === page ? 'btn-primary' : 'btn-light'" v-for="page in meta.last_page" :key="page" @click="ToPage(page)">{{page}}</span>
-      <span class="btn text-secondary"  @click="NextPage()">Next</span>
+      <span class="btn text-secondary" :class="meta.current_page === meta.last_page ? 'disabled' : ''" @click="NextPage()">Next</span>
     </div>
   </div>
 </template>
@@ -47,8 +47,6 @@ export default {
           this.links = response.data.links;
         })
         .catch((error) => error);
-
-      console.log("Component mounted.");
     },
 
     NextPage(){
@@ -73,3 +71,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.content{
+  min-height: 595px;
+
+  .card{
+    max-height: 282px;
+  }
+}
+</style>
