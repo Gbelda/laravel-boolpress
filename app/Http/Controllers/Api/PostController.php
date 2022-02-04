@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Article::with(['category', 'tags'])->paginate());
+        return PostResource::collection(Article::with(['category', 'tags'])->paginate(10));
     }
 
     /**
@@ -46,9 +46,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        //
+
+        ddd($article->id);
+        // ddd(Article::where('id', $article->id)->get());
+        $thisArticle = Article::where('id', $article->id)->first();
+        // ddd(Article::where('id', $article->id)->get());
+        return new PostResource($thisArticle);
     }
 
     /**

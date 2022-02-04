@@ -9,10 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
 
     protected $fillable = ['title', 'slug', 'content', 'image', 'post_date', 'category_id', 'user_id'];
 

@@ -31,6 +31,8 @@ const Products = Vue.component('products', require('./pages/ProductComponent.vue
 
 const Posts = Vue.component('posts', require('./pages/ArticleComponent.vue').default);
 
+const ArticlePage = Vue.component('post', require('./pages/ArticlePage.vue').default);
+
 
 const routes = [
     {
@@ -49,6 +51,11 @@ const routes = [
         path: '/posts',
         name: 'posts',
         component: Posts,
+    },
+    {
+        path: '/posts/:id',
+        name: 'post',
+        component: ArticlePage,
     }
 ];
 
@@ -58,6 +65,7 @@ const router = new VueRouter({
 });
 
 
+import Vue from 'vue';
 /* Setup Vue Router */
 
 import VueRouter from 'vue-router';

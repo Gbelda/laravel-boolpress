@@ -21,9 +21,9 @@ use App\Models\Article;
 
 
 
-Route::get('posts/{post}', function(Article $article){
-    return new PostResource(Article::find($article));
-});
+// Route::get('posts/{post}', function(Article $article){
+//     return new PostResource(Article::find($article));
+// });
 
 Route::get('articlevue',function(){
     return view('guest.articles.indexVue');
@@ -45,6 +45,7 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->name('admin.')->
     // Route::resource('contacts', ContactController::class);
     
 });
+
 
 Route::get('/{any}', function () {
     return view('welcome');
