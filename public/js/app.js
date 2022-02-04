@@ -5145,16 +5145,21 @@ __webpack_require__.r(__webpack_exports__);
       articles: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    GetPosts: function GetPosts() {
+      var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/posts").then(function (response) {
-      // console.log(response);
-      _this.articles = response.data.data;
-    })["catch"](function (error) {
-      return error;
-    });
-    console.log("Component mounted.");
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/posts").then(function (response) {
+        // console.log(response);
+        _this.articles = response.data.data;
+      })["catch"](function (error) {
+        return error;
+      });
+      console.log("Component mounted.");
+    }
+  },
+  mounted: function mounted() {
+    this.GetPosts();
   }
 });
 
@@ -5187,13 +5192,18 @@ __webpack_require__.r(__webpack_exports__);
       post: {}
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    GetPost: function GetPost() {
+      var _this = this;
 
-    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("api/posts/" + this.$route.params.id).then(function (resp) {
-      console.log(resp);
-      _this.post = resp.data.data;
-    });
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/posts/" + this.$route.params.id).then(function (resp) {
+        // console.log(resp.data.data);
+        _this.post = resp.data.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.GetPost();
   }
 });
 
@@ -41589,16 +41599,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("img", { attrs: { src: "/storage/" + _vm.post.image, alt: "" } }),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.post.title) + " hello")]),
+    ]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("div", { staticClass: "card-body" })])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

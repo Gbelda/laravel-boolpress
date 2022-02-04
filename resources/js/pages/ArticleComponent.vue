@@ -25,8 +25,10 @@ export default {
             articles : null
         }
     },
-  mounted() {
-    Axios.get("api/posts")
+
+    methods:{
+      GetPosts(){
+            Axios.get("/api/posts")
       .then((response) => {
         // console.log(response);
         this.articles = response.data.data;
@@ -34,6 +36,13 @@ export default {
       .catch((error) => error);
 
     console.log("Component mounted.");
-  },
+      }
+    },
+
+    mounted() {
+
+      this.GetPosts();
+
+    },
 };
 </script>

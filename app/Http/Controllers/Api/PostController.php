@@ -46,12 +46,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Article $post)
     {
 
-        ddd($article->id);
-        // ddd(Article::where('id', $article->id)->get());
-        $thisArticle = Article::where('id', $article->id)->first();
+        
+        // ddd(Article::where('id', $post->id)->get());
+        $thisArticle = Article::where('id', $post->id)->first();
+        // ddd(new PostResource($thisArticle));
         // ddd(Article::where('id', $article->id)->get());
         return new PostResource($thisArticle);
     }
